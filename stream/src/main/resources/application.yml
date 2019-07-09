@@ -1,0 +1,21 @@
+
+server:
+  port: 8088
+spring:
+  application:
+    name: StreamMessgaeHandle-1
+  cloud:
+    stream:
+      bindings:
+        example-topic-output:
+          destination: test-topic
+        example-topic-input:
+          destination: test-topic
+          consumer:
+            max-attempts: 1
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: rpa
+    password: rpa
+    virtual-host: /rpa
