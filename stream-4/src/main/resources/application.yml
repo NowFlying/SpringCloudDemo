@@ -1,0 +1,28 @@
+
+server:
+  port: 8088
+spring:
+  application:
+    name: StreamMessgaeHandle-1
+  cloud:
+    stream:
+      bindings:
+        example-topic-output:
+          destination: test-topic
+        example-topic-input:
+          destination: test-topic
+          consumer:
+            max-attempts: 1
+          group: stream-exception-handler
+      rabbit:
+        bindings:
+          example-topic-input:
+            consumer:
+             requeue-rejected: true #消息没被消费一直放入队列去消费
+             auto-bind-dlq: true
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
