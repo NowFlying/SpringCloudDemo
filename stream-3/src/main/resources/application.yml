@@ -1,0 +1,29 @@
+
+server:
+  port: 8088
+spring:
+  application:
+    name: StreamMessgaeHandle-1
+  cloud:
+    stream:
+      bindings:
+        example-topic-output:
+          destination: test-topic
+        example-topic-input:
+          destination: test-topic
+          consumer:
+            max-attempts: 1
+          group: stream-exception-handler
+      rabbit:
+        bindings:
+          example-topic-input:
+            consumer:
+              auto-bind-dlq: true  #异常后加入死信队列
+              republish-to-dlq: true #可以看到出现的异常的具体信息
+              dlq-ttl: 10000 #死信队列中消息保存的时间
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
