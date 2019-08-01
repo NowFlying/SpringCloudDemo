@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: eurekahatest
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 5
+    lease-expiration-duration-in-seconds: 10
+    health-check-url-path: /health
+    statusPageUrlPath: /info
+  client:
+    registry-fetch-interval-seconds: 5
+    service-url:
+      defaultZone: http://peer1:8761/eureka/,http://peer2:8762/eureka/
+
